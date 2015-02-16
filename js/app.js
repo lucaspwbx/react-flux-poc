@@ -9,9 +9,10 @@
 
 var React = require('react');
 
-var TodoApp = require('./components/TodoApp.react');
+var BookApp = require('./components/BookApp.react');
 
 React.render(
-  <TodoApp />,
+  <BookApp />,
   document.getElementById('todoapp')
 );
+
