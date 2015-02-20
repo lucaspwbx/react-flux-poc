@@ -17,10 +17,10 @@ var BookActions = {
     });
   },
 
-  destroy: function(id) {
+  destroy: function(title) {
     AppDispatcher.dispatch({
       actionType: BookConstants.BOOK_DESTROY,
-      id: id
+      title: title
     });
   }
 };

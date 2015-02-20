@@ -2,37 +2,30 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var BookConstants = require('../constants/BookConstants');
 var assign = require('object-assign');
+var _ = require('lodash');
 
 var CHANGE_EVENT = 'change';
 
-var _books = {};
-var _books2 = [];
+var _books = [];
 
 function create(book) {
-  // Hand waving here -- not showing how this interacts with XHR or persistent
-  // server-side storage.
-  // Using the current timestamp + random number in place of a real id.
-  //var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
-  //_books[id] = {
-  //  id: id,
-   // title: book.title,
-   // author: book.author
-  //};
-  _books2.push(book);
+  _books.push(book);
 }
 
 function update(id, updates) {
   //_books[id] = assign({}, _books[id], updates);
 }
 
-function destroy(id) {
-  //delete _books[id];
+function destroy(title) {
+  _.remove(_books, function(book) {
+    return book.title == title;
+  });
 }
 
 var BookStore = assign({}, EventEmitter.prototype, {
 
   getAll: function() {
-    return _books2;
+    return _books;
   },
 
   emitChange: function() {
@@ -66,7 +59,7 @@ AppDispatcher.register(function(action) {
       break;
 
     case BookConstants.BOOK_DESTROY:
-      destroy(action.id);
+      destroy(action.title);
       BookStore.emitChange();
       break;
 
