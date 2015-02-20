@@ -9,11 +9,11 @@ var BookActions = {
     });
   },
 
-  update: function(id, book) {
+  update: function(title, newTitle) {
     AppDispatcher.dispatch({
       actionType: BookConstants.BOOK_UPDATE,
-      id: id,
-      book: book
+      title: title,
+      newTitle: newTitle
     });
   },
 

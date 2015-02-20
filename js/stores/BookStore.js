@@ -12,8 +12,11 @@ function create(book) {
   _books.push(book);
 }
 
-function update(id, updates) {
-  //_books[id] = assign({}, _books[id], updates);
+function update(title, newTitle) {
+  var index = _.findIndex(_books, function(book) {
+    return book.title == title;
+  });
+  _books[index].title = newTitle;
 }
 
 function destroy(title) {
@@ -53,8 +56,9 @@ AppDispatcher.register(function(action) {
       break;
 
     case BookConstants.BOOK_UPDATE:
-      book = action.book;
-      update(action.id, { title: book.title, author: book.author });
+      //book = action.book;
+      //update(action.id, { title: book.title, author: book.author });
+      update(action.title, action.newTitle);
       BookStore.emitChange();
       break;
 

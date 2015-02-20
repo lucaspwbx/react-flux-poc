@@ -7,7 +7,8 @@ var Book = React.createClass({
     BookActions.destroy(title);
   },
   handleEdit: function() {
-    console.log('editing');
+    var title = this.props.title;
+    BookActions.update(title, 'modif');
   },
   render: function() {
     return (
